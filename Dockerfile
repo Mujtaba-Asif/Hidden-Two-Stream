@@ -32,7 +32,7 @@ RUN python3 -m ipykernel install --user
 #RUN pip3 install torch torchvision
 #http://download.pytorch.org/whl/cpu/torch-0.4.1-cp35-cp35m-linux_x86_64.whl torchvision
 RUN mkdir -p /workspace/src
-#WORKDIR /workspace/src
+#
 
 # Get code
 
@@ -41,7 +41,7 @@ COPY . /workspace/src
 RUN cd /usr/lib/x86_64-linux-gnu && ln -s libhdf5_serial.so.8.0.2 libhdf5.so && ln -s libhdf5_serial_hl.so.8.0.2 libhdf5_hl.so
 
 ENV LIBRARY_PATH=/usr/local/cuda/lib64
-
+WORKDIR /workspace/src
 RUN git clone --recursive -b 2.4 https://github.com/opencv/opencv opencv-2.4.3 \
     && cd /workspace/src/opencv-2.4.3 \
     && git apply /workspace/src/opencv_cuda9.patch && mkdir build && cd build \
