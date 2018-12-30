@@ -42,7 +42,7 @@ RUN cd /usr/lib/x86_64-linux-gnu && ln -s libhdf5_serial.so.8.0.2 libhdf5.so && 
 
 ENV LIBRARY_PATH=/usr/local/cuda/lib64
 
-RUN RUN git clone --recursive -b 2.4 https://github.com/opencv/opencv opencv--2.4.3 \
+RUN git clone --recursive -b 2.4 https://github.com/opencv/opencv opencv-2.4.3 \
     && cd /workspace/src/opencv-2.4.3 \
     && git apply /workspace/src/opencv_cuda9.patch && mkdir build && cd build \
     && cmake -D CMAKE_BUILD_TYPE=RELEASE -D WITH_TBB=ON  -D WITH_V4L=ON  -D WITH_CUDA=ON -D WITH_OPENCL=OFF .. && make -j4\
