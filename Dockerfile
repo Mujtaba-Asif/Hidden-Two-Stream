@@ -48,7 +48,7 @@ RUN git clone --recursive -b 2.4 https://github.com/opencv/opencv opencv-2.4.3 \
     && cmake -D CMAKE_BUILD_TYPE=RELEASE -D WITH_TBB=ON  -D WITH_V4L=ON  -D WITH_CUDA=ON -D WITH_OPENCL=OFF .. && make -j4\
     && cp lib/cv2.so / && cd /workspace/src
 
-RUN make -j -6 all \
+RUN make -j 6 all \
     && cp -r /Hidden-Two-Stream/distribute/python/caffe /usr/lib/python2.7/ \
     && cp -r /Hidden-Two-Stream/distribute/python/caffe /usr/lib/python3.5
 
