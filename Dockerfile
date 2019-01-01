@@ -47,7 +47,7 @@ RUN cd / && git clone --recursive -b 2.4 https://github.com/opencv/opencv opencv
     && cd /opencv-2.4.3 \
     && git apply /workspace/src/opencv_cuda9.patch && mkdir build && cd build \
     && cmake -D CMAKE_BUILD_TYPE=RELEASE -D WITH_TBB=ON  -D WITH_V4L=ON  -D WITH_CUDA=ON -D WITH_OPENCL=OFF .. && make -j4\
-    && cp lib/cv2.so
+    && cp lib/cv2.so /
 
 WORKDIR /workspace/src
 
