@@ -41,13 +41,17 @@ COPY . /workspace/src
 RUN cd /usr/lib/x86_64-linux-gnu && ln -s libhdf5_serial.so.8.0.2 libhdf5.so && ln -s libhdf5_serial_hl.so.8.0.2 libhdf5_hl.so
 
 ENV LIBRARY_PATH=/usr/local/cuda/lib64
-#WORKDIR /workspace/src
+#
 
 RUN cd / && git clone --recursive -b 2.4 https://github.com/opencv/opencv opencv-2.4.3 \
     && cd /opencv-2.4.3 \
     && git apply /workspace/src/opencv_cuda9.patch && mkdir build && cd build \
     && cmake -D CMAKE_BUILD_TYPE=RELEASE -D WITH_TBB=ON  -D WITH_V4L=ON  -D WITH_CUDA=ON -D WITH_OPENCL=OFF .. && make -j4\
-    && cp lib/cv2.so / && cd /workspace/src
+    && cp lib/cv2.so
+
+WORKDIR /workspace/src
+
+RUN ls
 
 RUN make -j 4 all \
     && cp -r /Hidden-Two-Stream/distribute/python/caffe /usr/lib/python2.7/ \
