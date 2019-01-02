@@ -53,9 +53,7 @@ WORKDIR /workspace/src
 
 RUN ls
 
-RUN make -j 4 all \
-    && cp -r /Hidden-Two-Stream/distribute/python/caffe /usr/lib/python2.7/ \
-    && cp -r /Hidden-Two-Stream/distribute/python/caffe /usr/lib/python3.5
+#RUN make -j 4 all && cp -r /Hidden-Two-Stream/distribute/python/caffe /usr/lib/python2.7/ && cp -r /Hidden-Two-Stream/distribute/python/caffe /usr/lib/python3.5
 
 ENV LD_LIBRARY_PATH=/workspace/src/build/lib/
 WORKDIR /workspace/src
