@@ -53,7 +53,7 @@ WORKDIR /workspace/src
 
 RUN ls && pkg-config --modversion opencv && pkg-config --cflags --libs opencv
 
-RUN make -j4 all && make pycaffe && make distribute && make runtest && cp -r /workspace/src/distribute/python/caffe /usr/lib/python2.7/ && cp -r /workspace/src/distribute/python/caffe /usr/lib/python3.5
+RUN make -j4 all && make pycaffe && make distribute && cp -r /workspace/src/distribute/python/caffe /usr/lib/python2.7/ && cp -r /workspace/src/distribute/python/caffe /usr/lib/python3.5
 
 ENV LD_LIBRARY_PATH=/workspace/src/build/lib/
 WORKDIR /workspace/src
