@@ -46,15 +46,14 @@ ENV LIBRARY_PATH=/usr/local/cuda/lib64
 RUN cd / && git clone --recursive -b 2.4 https://github.com/opencv/opencv opencv-2.4.3 \
     && cd /opencv-2.4.3 \
     && git apply /workspace/src/opencv_cuda9.patch && mkdir build && cd build \
-    && cmake -D CMAKE_BUILD_TYPE=RELEASE -D WITH_TBB=ON  -D WITH_V4L=ON  -D WITH_CUDA=ON -D WITH_OPENCL=OFF .. && make -j4\
-    && cp lib/cv2.so /
+    && cmake -D CMAKE_BUILD_TYPE=RELEASE -D WITH_TBB=ON  -D WITH_V4L=ON  -D WITH_CUDA=ON -D WITH_OPENCL=OFF .. && make -j4 && make install && ldconfig
+    #&& cp lib/cv2.so /
 
 WORKDIR /workspace/src
 
-RUN ls
+RUN ls && pkg-config --modversion opencv && pkg-config --cflags --libs opencv
 
-RUN make -j 4 all
-#&& cp -r /Hidden-Two-Stream/distribute/python/caffe /usr/lib/python2.7/ && cp -r /Hidden-Two-Stream/distribute/python/caffe /usr/lib/python3.5
+RUN make -j4 all && make pycaffe && make distribute && make runtest && cp -r /workspace/src/distribute/python/caffe /usr/lib/python2.7/ && cp -r /workspace/src/distribute/python/caffe /usr/lib/python3.5
 
 ENV LD_LIBRARY_PATH=/workspace/src/build/lib/
 WORKDIR /workspace/src
